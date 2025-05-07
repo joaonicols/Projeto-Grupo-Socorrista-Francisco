@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace GPSFrancisco
 {
@@ -24,7 +25,7 @@ namespace GPSFrancisco
             usuario = txtUsuario.Text;
             senha = txtSenha.Text;
 
-            if(usuario.Equals("senac") && senha.Equals("senac"))
+            if(acessaUsuario(usuario,senha))
             {
                 frmMenuPrincipal abrir = new frmMenuPrincipal();
                 abrir.Show();
@@ -51,6 +52,38 @@ namespace GPSFrancisco
         private void btnSair_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            Conexao.obterConexao();
+            MessageBox.Show("Banco de Dados conectado");
+            Conexao.fecharConexao();
+        }
+
+        //criando um método para acesso do usuário
+        public bool acessaUsuario(string nome, string senha)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select nome, senha from tbUsuarios where nome=@nome and senha=@senha;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 50).Value = nome;
+            comm.Parameters.Add("@senha", MySqlDbType.VarChar, 12).Value = senha;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+
+            bool resp = DR.HasRows;
+
+            Conexao.fecharConexao();
+
+            //retornar o valor
+            return resp;
         }
     }
 }
