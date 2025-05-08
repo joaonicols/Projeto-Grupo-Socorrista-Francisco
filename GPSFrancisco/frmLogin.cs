@@ -61,9 +61,12 @@ namespace GPSFrancisco
             Conexao.fecharConexao();
         }
 
+        bool resp = false;
+
         //criando um método para acesso do usuário
         public bool acessaUsuario(string nome, string senha)
         {
+            
             MySqlCommand comm = new MySqlCommand();
             comm.CommandText = "select nome, senha from tbUsuarios where nome=@nome and senha=@senha;";
             comm.CommandType = CommandType.Text;
@@ -76,13 +79,23 @@ namespace GPSFrancisco
             comm.Connection = Conexao.obterConexao();
 
             MySqlDataReader DR;
-            DR = comm.ExecuteReader();
 
-            bool resp = DR.HasRows;
+            try
+            {
+                DR = comm.ExecuteReader();
 
-            Conexao.fecharConexao();
+                resp = DR.HasRows;
 
-            //retornar o valor
+                Conexao.fecharConexao();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Banco de dados não conectado!",
+                    "Mensagem do sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
             return resp;
         }
     }

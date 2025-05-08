@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGerenciarUsuarios));
             this.gpbInformacoesUsuario = new System.Windows.Forms.GroupBox();
+            this.btnErro = new System.Windows.Forms.Button();
+            this.btnChecked = new System.Windows.Forms.Button();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.lblUsuário = new System.Windows.Forms.Label();
             this.txtSenha = new System.Windows.Forms.TextBox();
@@ -52,6 +54,8 @@
             // 
             // gpbInformacoesUsuario
             // 
+            this.gpbInformacoesUsuario.Controls.Add(this.btnErro);
+            this.gpbInformacoesUsuario.Controls.Add(this.btnChecked);
             this.gpbInformacoesUsuario.Controls.Add(this.txtUsuario);
             this.gpbInformacoesUsuario.Controls.Add(this.lblUsuário);
             this.gpbInformacoesUsuario.Controls.Add(this.txtSenha);
@@ -67,6 +71,30 @@
             this.gpbInformacoesUsuario.TabIndex = 0;
             this.gpbInformacoesUsuario.TabStop = false;
             this.gpbInformacoesUsuario.Text = "Informações do Usuário";
+            // 
+            // btnErro
+            // 
+            this.btnErro.FlatAppearance.BorderSize = 0;
+            this.btnErro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnErro.Image = ((System.Drawing.Image)(resources.GetObject("btnErro.Image")));
+            this.btnErro.Location = new System.Drawing.Point(434, 250);
+            this.btnErro.Name = "btnErro";
+            this.btnErro.Size = new System.Drawing.Size(36, 31);
+            this.btnErro.TabIndex = 8;
+            this.btnErro.UseVisualStyleBackColor = true;
+            this.btnErro.Visible = false;
+            // 
+            // btnChecked
+            // 
+            this.btnChecked.FlatAppearance.BorderSize = 0;
+            this.btnChecked.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChecked.Image = ((System.Drawing.Image)(resources.GetObject("btnChecked.Image")));
+            this.btnChecked.Location = new System.Drawing.Point(434, 251);
+            this.btnChecked.Name = "btnChecked";
+            this.btnChecked.Size = new System.Drawing.Size(36, 30);
+            this.btnChecked.TabIndex = 7;
+            this.btnChecked.UseVisualStyleBackColor = true;
+            this.btnChecked.Visible = false;
             // 
             // txtUsuario
             // 
@@ -113,6 +141,7 @@
             this.txtValidaSenha.PasswordChar = 'l';
             this.txtValidaSenha.Size = new System.Drawing.Size(162, 25);
             this.txtValidaSenha.TabIndex = 4;
+            this.txtValidaSenha.TextChanged += new System.EventHandler(this.txtValidaSenha_TextChanged);
             // 
             // lblValidaSenha
             // 
@@ -286,5 +315,7 @@
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Button btnChecked;
+        private System.Windows.Forms.Button btnErro;
     }
 }
