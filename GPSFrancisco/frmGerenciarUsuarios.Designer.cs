@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGerenciarUsuarios));
             this.gpbInformacoesUsuario = new System.Windows.Forms.GroupBox();
+            this.cbbUsuariosCadastrados = new System.Windows.Forms.ComboBox();
+            this.lblUsuariosCadastrados = new System.Windows.Forms.Label();
             this.btnErro = new System.Windows.Forms.Button();
             this.btnChecked = new System.Windows.Forms.Button();
             this.txtUsuario = new System.Windows.Forms.TextBox();
@@ -54,6 +56,8 @@
             // 
             // gpbInformacoesUsuario
             // 
+            this.gpbInformacoesUsuario.Controls.Add(this.cbbUsuariosCadastrados);
+            this.gpbInformacoesUsuario.Controls.Add(this.lblUsuariosCadastrados);
             this.gpbInformacoesUsuario.Controls.Add(this.btnErro);
             this.gpbInformacoesUsuario.Controls.Add(this.btnChecked);
             this.gpbInformacoesUsuario.Controls.Add(this.txtUsuario);
@@ -67,10 +71,28 @@
             this.gpbInformacoesUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpbInformacoesUsuario.Location = new System.Drawing.Point(26, 22);
             this.gpbInformacoesUsuario.Name = "gpbInformacoesUsuario";
-            this.gpbInformacoesUsuario.Size = new System.Drawing.Size(735, 379);
+            this.gpbInformacoesUsuario.Size = new System.Drawing.Size(888, 379);
             this.gpbInformacoesUsuario.TabIndex = 0;
             this.gpbInformacoesUsuario.TabStop = false;
             this.gpbInformacoesUsuario.Text = "Informações do Usuário";
+            // 
+            // cbbUsuariosCadastrados
+            // 
+            this.cbbUsuariosCadastrados.FormattingEnabled = true;
+            this.cbbUsuariosCadastrados.Location = new System.Drawing.Point(614, 62);
+            this.cbbUsuariosCadastrados.Name = "cbbUsuariosCadastrados";
+            this.cbbUsuariosCadastrados.Size = new System.Drawing.Size(199, 28);
+            this.cbbUsuariosCadastrados.TabIndex = 10;
+            this.cbbUsuariosCadastrados.Click += new System.EventHandler(this.cbbUsuariosCadastrados_Click);
+            // 
+            // lblUsuariosCadastrados
+            // 
+            this.lblUsuariosCadastrados.AutoSize = true;
+            this.lblUsuariosCadastrados.Location = new System.Drawing.Point(623, 39);
+            this.lblUsuariosCadastrados.Name = "lblUsuariosCadastrados";
+            this.lblUsuariosCadastrados.Size = new System.Drawing.Size(171, 20);
+            this.lblUsuariosCadastrados.TabIndex = 9;
+            this.lblUsuariosCadastrados.Text = "Usuários Cadastrados:";
             // 
             // btnErro
             // 
@@ -224,6 +246,7 @@
             this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // btnExcluir
             // 
@@ -317,5 +340,7 @@
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.Button btnChecked;
         private System.Windows.Forms.Button btnErro;
+        private System.Windows.Forms.ComboBox cbbUsuariosCadastrados;
+        private System.Windows.Forms.Label lblUsuariosCadastrados;
     }
 }
