@@ -128,7 +128,7 @@ namespace GPSFrancisco
 
         private void ltbPesquisar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string nome = ltbPesquisar.SelectedIndex.ToString();
+            string nome = ltbPesquisar.SelectedItem.ToString();
 
             frmGerenciarUsuarios abrir = new frmGerenciarUsuarios(nome);
             abrir.Show();
