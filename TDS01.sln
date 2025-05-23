@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPSFrancisco", "GPSFrancisco\GPSFrancisco.csproj", "{8181465F-DEE1-4617-A6F5-FFE054C233B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboard", "Dashboard\Dashboard.csproj", "{8424B3DB-6E87-4438-A58A-EFA0E038FFCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8181465F-DEE1-4617-A6F5-FFE054C233B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8181465F-DEE1-4617-A6F5-FFE054C233B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8181465F-DEE1-4617-A6F5-FFE054C233B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8424B3DB-6E87-4438-A58A-EFA0E038FFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8424B3DB-6E87-4438-A58A-EFA0E038FFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8424B3DB-6E87-4438-A58A-EFA0E038FFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8424B3DB-6E87-4438-A58A-EFA0E038FFCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
