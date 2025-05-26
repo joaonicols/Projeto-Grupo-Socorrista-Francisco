@@ -99,11 +99,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexao.cs" />
+    <Compile Include="frmAtribuicoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAtribuicoes.Designer.cs">
+      <DependentUpon>frmAtribuicoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGerenciarUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGerenciarUsuarios.Designer.cs">
       <DependentUpon>frmGerenciarUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGerenciarVoluntarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGerenciarVoluntarios.Designer.cs">
+      <DependentUpon>frmGerenciarVoluntarios.cs</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
@@ -131,8 +143,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAtribuicoes.resx">
+      <DependentUpon>frmAtribuicoes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGerenciarUsuarios.resx">
       <DependentUpon>frmGerenciarUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGerenciarVoluntarios.resx">
+      <DependentUpon>frmGerenciarVoluntarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

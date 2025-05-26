@@ -32,6 +32,7 @@
             this.btnVoluntarios = new System.Windows.Forms.Button();
             this.btnVoltar = new System.Windows.Forms.Button();
             this.btnUsuários = new System.Windows.Forms.Button();
+            this.btnAtribuicoes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnVoluntarios
@@ -45,6 +46,7 @@
             this.btnVoluntarios.Text = "  V&oluntários";
             this.btnVoluntarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnVoluntarios.UseVisualStyleBackColor = true;
+            this.btnVoluntarios.Click += new System.EventHandler(this.btnVoluntarios_Click);
             // 
             // btnVoltar
             // 
@@ -64,7 +66,7 @@
             // 
             this.btnUsuários.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUsuários.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuários.Image")));
-            this.btnUsuários.Location = new System.Drawing.Point(286, 12);
+            this.btnUsuários.Location = new System.Drawing.Point(455, 12);
             this.btnUsuários.Name = "btnUsuários";
             this.btnUsuários.Size = new System.Drawing.Size(199, 237);
             this.btnUsuários.TabIndex = 2;
@@ -73,17 +75,30 @@
             this.btnUsuários.UseVisualStyleBackColor = true;
             this.btnUsuários.Click += new System.EventHandler(this.btnUsuários_Click);
             // 
+            // btnAtribuicoes
+            // 
+            this.btnAtribuicoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtribuicoes.Image = ((System.Drawing.Image)(resources.GetObject("btnAtribuicoes.Image")));
+            this.btnAtribuicoes.Location = new System.Drawing.Point(240, 12);
+            this.btnAtribuicoes.Name = "btnAtribuicoes";
+            this.btnAtribuicoes.Size = new System.Drawing.Size(199, 237);
+            this.btnAtribuicoes.TabIndex = 3;
+            this.btnAtribuicoes.Text = "&Atribuições";
+            this.btnAtribuicoes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAtribuicoes.UseVisualStyleBackColor = true;
+            this.btnAtribuicoes.Click += new System.EventHandler(this.btnAtribuicoes_Click);
+            // 
             // frmMenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 622);
+            this.Controls.Add(this.btnAtribuicoes);
             this.Controls.Add(this.btnUsuários);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnVoluntarios);
             this.Name = "frmMenuPrincipal";
             this.Text = "GPSFrancisco - Menu Principal";
-            this.Load += new System.EventHandler(this.frmMenuPrincipal_Load_1);
             this.ResumeLayout(false);
 
         }
@@ -93,5 +108,6 @@
         private System.Windows.Forms.Button btnVoluntarios;
         private System.Windows.Forms.Button btnVoltar;
         private System.Windows.Forms.Button btnUsuários;
+        private System.Windows.Forms.Button btnAtribuicoes;
     }
 }
