@@ -60,6 +60,7 @@
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
             this.gpbInformacoesDirigente = new System.Windows.Forms.GroupBox();
+            this.ckbAtivo = new System.Windows.Forms.CheckBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.dtpHoras = new System.Windows.Forms.DateTimePicker();
             this.dtpData = new System.Windows.Forms.DateTimePicker();
@@ -68,7 +69,6 @@
             this.cbbAtribuicoes = new System.Windows.Forms.ComboBox();
             this.lblAtribuicoes = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.ckbAtivo = new System.Windows.Forms.CheckBox();
             this.gpbInformacoesVoluntarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoVoluntario)).BeginInit();
             this.pnlCRUD.SuspendLayout();
@@ -442,10 +442,20 @@
             this.gpbInformacoesDirigente.TabStop = false;
             this.gpbInformacoesDirigente.Text = "Informações do Dirigente";
             // 
+            // ckbAtivo
+            // 
+            this.ckbAtivo.AutoSize = true;
+            this.ckbAtivo.Location = new System.Drawing.Point(930, 74);
+            this.ckbAtivo.Name = "ckbAtivo";
+            this.ckbAtivo.Size = new System.Drawing.Size(63, 24);
+            this.ckbAtivo.TabIndex = 17;
+            this.ckbAtivo.Text = "Ativo";
+            this.ckbAtivo.UseVisualStyleBackColor = true;
+            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(1023, 42);
+            this.lblStatus.Location = new System.Drawing.Point(926, 43);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(60, 20);
             this.lblStatus.TabIndex = 16;
@@ -454,7 +464,7 @@
             // dtpHoras
             // 
             this.dtpHoras.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoras.Location = new System.Drawing.Point(482, 69);
+            this.dtpHoras.Location = new System.Drawing.Point(482, 57);
             this.dtpHoras.Name = "dtpHoras";
             this.dtpHoras.Size = new System.Drawing.Size(127, 26);
             this.dtpHoras.TabIndex = 13;
@@ -462,7 +472,7 @@
             // dtpData
             // 
             this.dtpData.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpData.Location = new System.Drawing.Point(323, 69);
+            this.dtpData.Location = new System.Drawing.Point(323, 57);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(116, 26);
             this.dtpData.TabIndex = 12;
@@ -470,7 +480,7 @@
             // lblHoras
             // 
             this.lblHoras.AutoSize = true;
-            this.lblHoras.Location = new System.Drawing.Point(502, 41);
+            this.lblHoras.Location = new System.Drawing.Point(502, 29);
             this.lblHoras.Name = "lblHoras";
             this.lblHoras.Size = new System.Drawing.Size(48, 20);
             this.lblHoras.TabIndex = 13;
@@ -479,7 +489,7 @@
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(324, 41);
+            this.lblData.Location = new System.Drawing.Point(324, 29);
             this.lblData.Name = "lblData";
             this.lblData.Size = new System.Drawing.Size(48, 20);
             this.lblData.TabIndex = 11;
@@ -488,16 +498,17 @@
             // cbbAtribuicoes
             // 
             this.cbbAtribuicoes.FormattingEnabled = true;
-            this.cbbAtribuicoes.Location = new System.Drawing.Point(26, 65);
+            this.cbbAtribuicoes.Location = new System.Drawing.Point(26, 53);
             this.cbbAtribuicoes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbbAtribuicoes.Name = "cbbAtribuicoes";
             this.cbbAtribuicoes.Size = new System.Drawing.Size(206, 28);
             this.cbbAtribuicoes.TabIndex = 11;
+            this.cbbAtribuicoes.SelectedIndexChanged += new System.EventHandler(this.cbbAtribuicoes_SelectedIndexChanged);
             // 
             // lblAtribuicoes
             // 
             this.lblAtribuicoes.AutoSize = true;
-            this.lblAtribuicoes.Location = new System.Drawing.Point(21, 42);
+            this.lblAtribuicoes.Location = new System.Drawing.Point(21, 30);
             this.lblAtribuicoes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAtribuicoes.Name = "lblAtribuicoes";
             this.lblAtribuicoes.Size = new System.Drawing.Size(92, 20);
@@ -507,16 +518,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // ckbAtivo
-            // 
-            this.ckbAtivo.AutoSize = true;
-            this.ckbAtivo.Location = new System.Drawing.Point(1027, 73);
-            this.ckbAtivo.Name = "ckbAtivo";
-            this.ckbAtivo.Size = new System.Drawing.Size(63, 24);
-            this.ckbAtivo.TabIndex = 17;
-            this.ckbAtivo.Text = "Ativo";
-            this.ckbAtivo.UseVisualStyleBackColor = true;
             // 
             // frmGerenciarVoluntarios
             // 

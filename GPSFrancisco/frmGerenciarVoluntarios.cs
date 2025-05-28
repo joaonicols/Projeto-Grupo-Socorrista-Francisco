@@ -45,7 +45,7 @@ namespace GPSFrancisco
             this.Hide();
         }
 
-        public int cadastrarAtribuicoes(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, int codAtr, DateTime data,  DateTime hora,  int status)
+        public int cadastrarAtribuicoes(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, DateTime data,  DateTime hora,  int status)
         {
             MySqlCommand comm = new MySqlCommand();
             comm.CommandText = "insert into tbVoluntarios(nome, email, telCel, endereco, numero, cep, bairro, cidade, estado, codAtr, data, hora, status) values (@nome, @email, @telCel, @endereco, @numero, @cep, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status);";
@@ -61,7 +61,7 @@ namespace GPSFrancisco
             comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = bairro;
             comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = cidade;
             comm.Parameters.Add("@nome", MySqlDbType.VarChar, 2).Value = estado;
-            comm.Parameters.Add("@nome", MySqlDbType.Int32).Value = codAtr;
+            comm.Parameters.Add("@nome", MySqlDbType.Int32).Value = codigoAtribuicao;
             comm.Parameters.Add("@nome", MySqlDbType.Date, 100).Value = data;
             comm.Parameters.Add("@nome", MySqlDbType.Time, 100).Value = hora;
             comm.Parameters.Add("@nome", MySqlDbType.Bit, 100).Value = status;
@@ -92,6 +92,32 @@ namespace GPSFrancisco
             }
 
             Conexao.fecharConexao();
+        }
+
+        //buscando código da atribuição carregada na combo
+        public int buscaCodigoAtribuicoes(string nome)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select codAtr from tbAtribuicoes where nome = @nome;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nome;
+
+            comm.Connection = Conexao.obterConexao();
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+            DR.Read();
+            int codAtr = DR.GetInt32(0);
+            Conexao.fecharConexao();
+
+            return codAtr;
+        }
+
+        int codigoAtribuicao;
+        private void cbbAtribuicoes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int codigoAtribuicao = buscaCodigoAtribuicoes(cbbAtribuicoes.SelectedItem.ToString());
         }
     }
 }
