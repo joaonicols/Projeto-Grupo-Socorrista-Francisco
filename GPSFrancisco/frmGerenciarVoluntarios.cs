@@ -29,6 +29,7 @@ namespace GPSFrancisco
         {
             InitializeComponent();
             carregaAtribuicoes();
+            desabilitarCamposNovo();
         }
 
         private void frmGerenciarVoluntarios_Load(object sender, EventArgs e)
@@ -118,6 +119,82 @@ namespace GPSFrancisco
         private void cbbAtribuicoes_SelectedIndexChanged(object sender, EventArgs e)
         {
             int codigoAtribuicao = buscaCodigoAtribuicoes(cbbAtribuicoes.SelectedItem.ToString());
+        }
+
+        //desabilitar campos
+        public void desabilitarCamposNovo()
+        {
+            txtCodigo.Enabled = false;
+            txtNome.Enabled = false;
+            txtEmail.Enabled = false;
+            txtEndereco.Enabled = false;
+            txtBairro.Enabled = false;
+            txtCidade.Enabled = false;
+            txtNumero.Enabled = false;
+            mtbCEP.Enabled = false;
+            mtbTelefone.Enabled = false;
+            cbbAtribuicoes.Enabled = false;
+            cbbEstado.Enabled = false;
+            dtpData.Enabled = false;
+            dtpHoras.Enabled = false;
+            btnCadastrar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimpar.Enabled = false;
+            ckbAtivo.Enabled = false;
+        }
+
+        //habilitar campos
+        public void habilitarCamposNovo()
+        {
+            txtCodigo.Enabled = false;
+            txtNome.Enabled = true;
+            txtEmail.Enabled = true;
+            txtEndereco.Enabled = true;
+            txtBairro.Enabled = true;
+            txtCidade.Enabled = true;
+            txtNumero.Enabled = true;
+            mtbCEP.Enabled = true;
+            mtbTelefone.Enabled = true;
+            cbbAtribuicoes.Enabled = true;
+            cbbEstado.Enabled = true;
+            dtpData.Enabled = true;
+            dtpHoras.Enabled = true;
+            ckbAtivo.Enabled = false;
+            btnCadastrar.Enabled = true;
+            btnAlterar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimpar.Enabled = true;
+            txtNome.Focus();
+            
+        }
+
+        //desabilitar campos
+        public void limparCampos()
+        {
+            txtCodigo.Clear();
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtEndereco.Clear();
+            txtBairro.Clear();
+            txtCidade.Clear();
+            txtNumero.Clear();
+            mtbCEP.Clear();
+            mtbTelefone.Clear();
+            cbbAtribuicoes.Text = "";
+            cbbEstado.Text = "";
+            dtpData.Value = DateTime.Now;
+            dtpHoras.Value = DateTime.Now;
+            ckbAtivo.Checked = false;
+            btnCadastrar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnLimpar.Enabled = true;
+            txtNome.Focus();
+            desabilitarCamposNovo();            
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
