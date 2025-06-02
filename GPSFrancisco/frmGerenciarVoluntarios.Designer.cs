@@ -69,6 +69,8 @@
             this.cbbAtribuicoes = new System.Windows.Forms.ComboBox();
             this.lblAtribuicoes = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtComplemento = new System.Windows.Forms.TextBox();
+            this.lblComplemento = new System.Windows.Forms.Label();
             this.gpbInformacoesVoluntarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoVoluntario)).BeginInit();
             this.pnlCRUD.SuspendLayout();
@@ -77,6 +79,8 @@
             // 
             // gpbInformacoesVoluntarios
             // 
+            this.gpbInformacoesVoluntarios.Controls.Add(this.txtComplemento);
+            this.gpbInformacoesVoluntarios.Controls.Add(this.lblComplemento);
             this.gpbInformacoesVoluntarios.Controls.Add(this.pcbFotoVoluntario);
             this.gpbInformacoesVoluntarios.Controls.Add(this.cbbEstado);
             this.gpbInformacoesVoluntarios.Controls.Add(this.lblEstado);
@@ -113,7 +117,7 @@
             this.pcbFotoVoluntario.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pcbFotoVoluntario.Location = new System.Drawing.Point(882, 37);
             this.pcbFotoVoluntario.Name = "pcbFotoVoluntario";
-            this.pcbFotoVoluntario.Size = new System.Drawing.Size(319, 206);
+            this.pcbFotoVoluntario.Size = new System.Drawing.Size(319, 167);
             this.pcbFotoVoluntario.TabIndex = 24;
             this.pcbFotoVoluntario.TabStop = false;
             // 
@@ -124,7 +128,7 @@
             this.cbbEstado.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbbEstado.Name = "cbbEstado";
             this.cbbEstado.Size = new System.Drawing.Size(138, 28);
-            this.cbbEstado.TabIndex = 10;
+            this.cbbEstado.TabIndex = 11;
             // 
             // lblEstado
             // 
@@ -143,7 +147,7 @@
             this.txtCidade.MaxLength = 50;
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Size = new System.Drawing.Size(268, 26);
-            this.txtCidade.TabIndex = 9;
+            this.txtCidade.TabIndex = 10;
             // 
             // lblCidade
             // 
@@ -162,7 +166,7 @@
             this.txtBairro.MaxLength = 50;
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(268, 26);
-            this.txtBairro.TabIndex = 8;
+            this.txtBairro.TabIndex = 9;
             // 
             // lblBairro
             // 
@@ -220,6 +224,7 @@
             this.mtbCEP.Name = "mtbCEP";
             this.mtbCEP.Size = new System.Drawing.Size(107, 26);
             this.mtbCEP.TabIndex = 7;
+            this.mtbCEP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCEP_KeyDown);
             // 
             // lblCEP
             // 
@@ -331,7 +336,7 @@
             this.btnVoltar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(156, 58);
-            this.btnVoltar.TabIndex = 20;
+            this.btnVoltar.TabIndex = 22;
             this.btnVoltar.Text = "&Voltar";
             this.btnVoltar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -346,7 +351,7 @@
             this.btnLimpar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(156, 58);
-            this.btnLimpar.TabIndex = 19;
+            this.btnLimpar.TabIndex = 21;
             this.btnLimpar.Text = "&Limpar";
             this.btnLimpar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -360,11 +365,12 @@
             this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(156, 58);
-            this.btnPesquisar.TabIndex = 18;
+            this.btnPesquisar.TabIndex = 20;
             this.btnPesquisar.Text = "&Pesquisar";
             this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // btnExcluir
             // 
@@ -374,7 +380,7 @@
             this.btnExcluir.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(156, 58);
-            this.btnExcluir.TabIndex = 17;
+            this.btnExcluir.TabIndex = 19;
             this.btnExcluir.Text = "&Excluir";
             this.btnExcluir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -388,7 +394,7 @@
             this.btnAlterar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(170, 58);
-            this.btnAlterar.TabIndex = 16;
+            this.btnAlterar.TabIndex = 18;
             this.btnAlterar.Text = "&Alterar";
             this.btnAlterar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAlterar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -402,11 +408,12 @@
             this.btnCadastrar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(191, 58);
-            this.btnCadastrar.TabIndex = 15;
+            this.btnCadastrar.TabIndex = 17;
             this.btnCadastrar.Text = "&Cadastrar";
             this.btnCadastrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCadastrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // btnNovo
             // 
@@ -416,7 +423,7 @@
             this.btnNovo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(187, 58);
-            this.btnNovo.TabIndex = 14;
+            this.btnNovo.TabIndex = 16;
             this.btnNovo.Text = "&Novo";
             this.btnNovo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -449,7 +456,7 @@
             this.ckbAtivo.Location = new System.Drawing.Point(930, 74);
             this.ckbAtivo.Name = "ckbAtivo";
             this.ckbAtivo.Size = new System.Drawing.Size(63, 24);
-            this.ckbAtivo.TabIndex = 17;
+            this.ckbAtivo.TabIndex = 15;
             this.ckbAtivo.Text = "Ativo";
             this.ckbAtivo.UseVisualStyleBackColor = true;
             // 
@@ -468,7 +475,7 @@
             this.dtpHoras.Location = new System.Drawing.Point(482, 57);
             this.dtpHoras.Name = "dtpHoras";
             this.dtpHoras.Size = new System.Drawing.Size(127, 26);
-            this.dtpHoras.TabIndex = 13;
+            this.dtpHoras.TabIndex = 14;
             // 
             // dtpData
             // 
@@ -476,7 +483,7 @@
             this.dtpData.Location = new System.Drawing.Point(323, 57);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(116, 26);
-            this.dtpData.TabIndex = 12;
+            this.dtpData.TabIndex = 13;
             // 
             // lblHoras
             // 
@@ -503,7 +510,7 @@
             this.cbbAtribuicoes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbbAtribuicoes.Name = "cbbAtribuicoes";
             this.cbbAtribuicoes.Size = new System.Drawing.Size(206, 28);
-            this.cbbAtribuicoes.TabIndex = 11;
+            this.cbbAtribuicoes.TabIndex = 12;
             this.cbbAtribuicoes.SelectedIndexChanged += new System.EventHandler(this.cbbAtribuicoes_SelectedIndexChanged);
             // 
             // lblAtribuicoes
@@ -519,6 +526,25 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // txtComplemento
+            // 
+            this.txtComplemento.Location = new System.Drawing.Point(808, 243);
+            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtComplemento.MaxLength = 50;
+            this.txtComplemento.Name = "txtComplemento";
+            this.txtComplemento.Size = new System.Drawing.Size(107, 26);
+            this.txtComplemento.TabIndex = 8;
+            // 
+            // lblComplemento
+            // 
+            this.lblComplemento.AutoSize = true;
+            this.lblComplemento.Location = new System.Drawing.Point(803, 220);
+            this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblComplemento.Name = "lblComplemento";
+            this.lblComplemento.Size = new System.Drawing.Size(112, 20);
+            this.lblComplemento.TabIndex = 26;
+            this.lblComplemento.Text = "Complemento:";
             // 
             // frmGerenciarVoluntarios
             // 
@@ -587,5 +613,7 @@
         private System.Windows.Forms.PictureBox pcbFotoVoluntario;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox ckbAtivo;
+        private System.Windows.Forms.TextBox txtComplemento;
+        private System.Windows.Forms.Label lblComplemento;
     }
 }

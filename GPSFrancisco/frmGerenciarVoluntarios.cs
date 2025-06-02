@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using MosaicoSolutions.ViaCep;
 
 namespace GPSFrancisco
 {
@@ -30,6 +31,15 @@ namespace GPSFrancisco
             InitializeComponent();
             carregaAtribuicoes();
             desabilitarCamposNovo();
+        }
+
+        //criando método construtor com parâmetros
+        public frmGerenciarVoluntarios(string nome)
+        {
+            InitializeComponent();
+            carregaAtribuicoes();
+            desabilitarCamposNovo();
+            txtNome.Text = nome;
         }
 
         private void frmGerenciarVoluntarios_Load(object sender, EventArgs e)
@@ -132,6 +142,7 @@ namespace GPSFrancisco
             txtCidade.Enabled = false;
             txtNumero.Enabled = false;
             mtbCEP.Enabled = false;
+            txtComplemento.Enabled = false;
             mtbTelefone.Enabled = false;
             cbbAtribuicoes.Enabled = false;
             cbbEstado.Enabled = false;
@@ -154,6 +165,7 @@ namespace GPSFrancisco
             txtCidade.Enabled = true;
             txtNumero.Enabled = true;
             mtbCEP.Enabled = true;
+            txtComplemento.Enabled = true;
             mtbTelefone.Enabled = true;
             cbbAtribuicoes.Enabled = true;
             cbbEstado.Enabled = true;
@@ -179,6 +191,7 @@ namespace GPSFrancisco
             txtCidade.Clear();
             txtNumero.Clear();
             mtbCEP.Clear();
+            txtComplemento.Clear();
             mtbTelefone.Clear();
             cbbAtribuicoes.Text = "";
             cbbEstado.Text = "";
@@ -194,7 +207,72 @@ namespace GPSFrancisco
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
+            habilitarCamposNovo();
+        }
 
+        private void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            //verificando se os campos foram preenchidos
+            if(txtNome.Text.Equals("") || txtEmail.Text.Equals("") || mtbTelefone.Text.Equals("(  )      -") || txtEndereco.Text.Equals("") || txtNumero.Text.Equals("")  || mtbCEP.Text.Equals("     -") || txtBairro.Text.Equals("") || txtCidade.Text.Equals("") || cbbEstado.Text.Equals("") || cbbAtribuicoes.Text.Equals("") || ckbAtivo.Checked == false)
+            {
+                MessageBox.Show("Favor preencher os campos",
+                    "Mensagem do sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+                txtNome.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Cadastrado com sucesso.",
+                    "Mensagem do sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+                limparCampos();
+                desabilitarCamposNovo();
+            }
+        }
+
+        //criando o método busca cep
+        public void buscaCEP(string cep)
+        {
+            var viaCEPService = ViaCepService.Default();
+            try
+            {
+                var endereco = viaCEPService.ObterEndereco(cep);
+
+                txtEndereco.Text = endereco.Logradouro.ToString();
+                txtCidade.Text = endereco.Localidade.ToString();
+                txtBairro.Text = endereco.Bairro.ToString();
+                cbbEstado.Text = endereco.UF.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("CEP não encontrado.",
+                     "Mensagem do sistema",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Error,
+                     MessageBoxDefaultButton.Button1);
+                mtbCEP.Text = "";
+                mtbCEP.Focus();
+            }
+        }
+
+        private void mtbCEP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buscaCEP(mtbCEP.Text);
+                txtNumero.Focus();
+            }
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            frmPesquisarVoluntarios abrir = new frmPesquisarVoluntarios();
+            abrir.Show();
+            this.Hide();
         }
     }
 }
