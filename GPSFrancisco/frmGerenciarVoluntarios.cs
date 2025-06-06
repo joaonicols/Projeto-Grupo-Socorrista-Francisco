@@ -56,7 +56,7 @@ namespace GPSFrancisco
             this.Hide();
         }
 
-        public int cadastrarAtribuicoes(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, DateTime data,  DateTime hora,  int status)
+        public int cadastrarVoluntarios(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, int codAtr, string data,  string hora,  int status)
         {
             MySqlCommand comm = new MySqlCommand();
             comm.CommandText = "insert into tbVoluntarios(nome, email, telCel, endereco, numero, cep, bairro, cidade, estado, codAtr, data, hora, status) values (@nome, @email, @telCel, @endereco, @numero, @cep, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status);";
@@ -64,18 +64,18 @@ namespace GPSFrancisco
 
             comm.Parameters.Clear();
             comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nome;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = email;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 15).Value = telCel;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = endereco;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 5).Value = numero;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 9).Value = cep;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = bairro;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = cidade;
-            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 2).Value = estado;
-            comm.Parameters.Add("@nome", MySqlDbType.Int32).Value = codigoAtribuicao;
-            comm.Parameters.Add("@nome", MySqlDbType.Date, 100).Value = data;
-            comm.Parameters.Add("@nome", MySqlDbType.Time, 100).Value = hora;
-            comm.Parameters.Add("@nome", MySqlDbType.Bit, 100).Value = status;
+            comm.Parameters.Add("@email", MySqlDbType.VarChar, 100).Value = email;
+            comm.Parameters.Add("@telCel", MySqlDbType.VarChar, 15).Value = telCel;
+            comm.Parameters.Add("@endereco", MySqlDbType.VarChar, 100).Value = endereco;
+            comm.Parameters.Add("@numero", MySqlDbType.VarChar, 5).Value = numero;
+            comm.Parameters.Add("@cep", MySqlDbType.VarChar, 9).Value = cep;
+            comm.Parameters.Add("@bairro", MySqlDbType.VarChar, 100).Value = bairro;
+            comm.Parameters.Add("@cidade", MySqlDbType.VarChar, 100).Value = cidade;
+            comm.Parameters.Add("@estado", MySqlDbType.VarChar, 2).Value = estado;
+            comm.Parameters.Add("@codAtr", MySqlDbType.Int32).Value = codigoAtribuicao;
+            comm.Parameters.Add("@data", MySqlDbType.Date, 100).Value = data;
+            comm.Parameters.Add("@hora", MySqlDbType.Time, 100).Value = hora;
+            comm.Parameters.Add("@status", MySqlDbType.Bit, 100).Value = status;
 
             comm.Connection = Conexao.obterConexao();
 
@@ -128,7 +128,7 @@ namespace GPSFrancisco
         int codigoAtribuicao;
         private void cbbAtribuicoes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int codigoAtribuicao = buscaCodigoAtribuicoes(cbbAtribuicoes.SelectedItem.ToString());
+            codigoAtribuicao = buscaCodigoAtribuicoes(cbbAtribuicoes.SelectedItem.ToString());
         }
 
         //desabilitar campos
@@ -224,6 +224,20 @@ namespace GPSFrancisco
             }
             else
             {
+                int status = 0;
+                if(ckbAtivo.Checked)
+                {
+                    status = 1;
+                }
+                else
+                {
+                    status = 0;
+                }
+                if (cadastrarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, dtpData.Text, dtpHoras.Text, status) == 1)
+                {
+
+                }
+
                 MessageBox.Show("Cadastrado com sucesso.",
                     "Mensagem do sistema",
                     MessageBoxButtons.OK,
