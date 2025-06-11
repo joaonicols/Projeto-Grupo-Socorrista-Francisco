@@ -40,6 +40,7 @@ namespace GPSFrancisco
             carregaAtribuicoes();
             desabilitarCamposNovo();
             txtNome.Text = nome;
+            carregaVoluntariosPorNome(txtNome.Text);
         }
 
         private void frmGerenciarVoluntarios_Load(object sender, EventArgs e)
@@ -177,7 +178,32 @@ namespace GPSFrancisco
             btnExcluir.Enabled = false;
             btnLimpar.Enabled = true;
             txtNome.Focus();
-            
+        }
+
+        //habilitar campos ALTERAR
+        public void habilitarCamposAlterar()
+        {
+            txtCodigo.Enabled = false;
+            txtNome.Enabled = true;
+            txtEmail.Enabled = true;
+            txtEndereco.Enabled = true;
+            txtBairro.Enabled = true;
+            txtCidade.Enabled = true;
+            txtNumero.Enabled = true;
+            mtbCEP.Enabled = true;
+            txtComplemento.Enabled = true;
+            mtbTelefone.Enabled = true;
+            cbbAtribuicoes.Enabled = true;
+            cbbEstado.Enabled = true;
+            dtpData.Enabled = true;
+            dtpHoras.Enabled = true;
+            ckbAtivo.Enabled = false;
+            btnNovo.Enabled = false;
+            btnCadastrar.Enabled = false;
+            btnAlterar.Enabled = true;
+            btnExcluir.Enabled = true;
+            btnLimpar.Enabled = true;
+            txtNome.Focus();
         }
 
         //desabilitar campos
@@ -273,6 +299,54 @@ namespace GPSFrancisco
             }
         }
 
+        //buscar voluntarios alterar/deletar
+        public void carregaVoluntariosPorNome(string nome)
+        {
+            bool status = false;
+
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "select * from tbVoluntarios where nome = @nome;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nome;
+
+            comm.Connection = Conexao.obterConexao();
+
+            MySqlDataReader DR;
+            DR = comm.ExecuteReader();
+            DR.Read();
+
+            if (DR.GetInt32(13) == 1)
+            {
+                status = true; 
+            }
+            if (DR.GetInt32(13) == 0)
+            {
+                status = false;
+            }
+
+            txtCodigo.Text = Convert.ToString(DR.GetInt32(0));
+            txtNome.Text = DR.GetString(1);
+            txtEmail.Text = DR.GetString(2);
+            mtbTelefone.Text = DR.GetString(3);
+            txtEndereco.Text = DR.GetString(4);
+            txtNumero.Text = DR.GetString(5);
+            mtbCEP.Text = DR.GetString(6);
+            txtBairro.Text = DR.GetString(7);
+            txtCidade.Text = DR.GetString(8);
+            cbbEstado.Text = DR.GetString(9);
+            codigoAtribuicao = DR.GetInt32(10);
+            dtpData.Value = DR.GetDateTime(11);
+            dtpHoras.Value = DR.GetDateTime(12);
+            ckbAtivo.Checked = status;
+
+            Conexao.fecharConexao();
+
+            habilitarCamposAlterar();
+        }
+
+
         private void mtbCEP_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -287,6 +361,15 @@ namespace GPSFrancisco
             frmPesquisarVoluntarios abrir = new frmPesquisarVoluntarios();
             abrir.Show();
             this.Hide();
+        }
+
+        private void btnCarregar_Click(object sender, EventArgs e)
+        {
+            //pcbFotoVoluntario.Image = Image.FromFile(@"C:\Users\joao.nsarruda\Documents\Visual Studio 2022\TDS01\images/yuri.jpg");
+            //pcbFotoVoluntario.ImageLocation = @"C:\Users\joao.nsarruda\Documents\Visual Studio 2022\TDS01\images/yuri.jpg";
+            ofdCarregar.ShowDialog();
+            string path = ofdCarregar.FileName;
+            pcbFotoVoluntario.Image = Image.FromFile(path);
         }
     }
 }

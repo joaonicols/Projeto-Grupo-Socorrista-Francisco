@@ -97,7 +97,7 @@ namespace GPSFrancisco
             ltbPesquisar.Items.Clear();
             while (DR.Read())
             {
-                ltbPesquisar.Items.Add(DR.GetInt32(1));
+                ltbPesquisar.Items.Add(DR.GetString(1));
             }
          
             Conexao.fecharConexao();

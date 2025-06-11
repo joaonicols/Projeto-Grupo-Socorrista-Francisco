@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGerenciarVoluntarios));
             this.gpbInformacoesVoluntarios = new System.Windows.Forms.GroupBox();
+            this.txtComplemento = new System.Windows.Forms.TextBox();
+            this.lblComplemento = new System.Windows.Forms.Label();
             this.pcbFotoVoluntario = new System.Windows.Forms.PictureBox();
             this.cbbEstado = new System.Windows.Forms.ComboBox();
             this.lblEstado = new System.Windows.Forms.Label();
@@ -68,9 +70,8 @@
             this.lblData = new System.Windows.Forms.Label();
             this.cbbAtribuicoes = new System.Windows.Forms.ComboBox();
             this.lblAtribuicoes = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtComplemento = new System.Windows.Forms.TextBox();
-            this.lblComplemento = new System.Windows.Forms.Label();
+            this.btnCarregar = new System.Windows.Forms.Button();
+            this.ofdCarregar = new System.Windows.Forms.OpenFileDialog();
             this.gpbInformacoesVoluntarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoVoluntario)).BeginInit();
             this.pnlCRUD.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // gpbInformacoesVoluntarios
             // 
+            this.gpbInformacoesVoluntarios.Controls.Add(this.btnCarregar);
             this.gpbInformacoesVoluntarios.Controls.Add(this.txtComplemento);
             this.gpbInformacoesVoluntarios.Controls.Add(this.lblComplemento);
             this.gpbInformacoesVoluntarios.Controls.Add(this.pcbFotoVoluntario);
@@ -112,12 +114,32 @@
             this.gpbInformacoesVoluntarios.TabStop = false;
             this.gpbInformacoesVoluntarios.Text = "Informações do Voluntário";
             // 
+            // txtComplemento
+            // 
+            this.txtComplemento.Location = new System.Drawing.Point(808, 243);
+            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtComplemento.MaxLength = 50;
+            this.txtComplemento.Name = "txtComplemento";
+            this.txtComplemento.Size = new System.Drawing.Size(107, 26);
+            this.txtComplemento.TabIndex = 8;
+            // 
+            // lblComplemento
+            // 
+            this.lblComplemento.AutoSize = true;
+            this.lblComplemento.Location = new System.Drawing.Point(803, 220);
+            this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblComplemento.Name = "lblComplemento";
+            this.lblComplemento.Size = new System.Drawing.Size(112, 20);
+            this.lblComplemento.TabIndex = 26;
+            this.lblComplemento.Text = "Complemento:";
+            // 
             // pcbFotoVoluntario
             // 
             this.pcbFotoVoluntario.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pcbFotoVoluntario.Location = new System.Drawing.Point(882, 37);
+            this.pcbFotoVoluntario.Location = new System.Drawing.Point(1002, 25);
             this.pcbFotoVoluntario.Name = "pcbFotoVoluntario";
-            this.pcbFotoVoluntario.Size = new System.Drawing.Size(319, 167);
+            this.pcbFotoVoluntario.Size = new System.Drawing.Size(203, 167);
+            this.pcbFotoVoluntario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbFotoVoluntario.TabIndex = 24;
             this.pcbFotoVoluntario.TabStop = false;
             // 
@@ -523,28 +545,19 @@
             this.lblAtribuicoes.TabIndex = 8;
             this.lblAtribuicoes.Text = "Atribuições:";
             // 
-            // openFileDialog1
+            // btnCarregar
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.btnCarregar.Location = new System.Drawing.Point(1066, 198);
+            this.btnCarregar.Name = "btnCarregar";
+            this.btnCarregar.Size = new System.Drawing.Size(90, 28);
+            this.btnCarregar.TabIndex = 27;
+            this.btnCarregar.Text = "Carregar";
+            this.btnCarregar.UseVisualStyleBackColor = true;
+            this.btnCarregar.Click += new System.EventHandler(this.btnCarregar_Click);
             // 
-            // txtComplemento
+            // ofdCarregar
             // 
-            this.txtComplemento.Location = new System.Drawing.Point(808, 243);
-            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtComplemento.MaxLength = 50;
-            this.txtComplemento.Name = "txtComplemento";
-            this.txtComplemento.Size = new System.Drawing.Size(107, 26);
-            this.txtComplemento.TabIndex = 8;
-            // 
-            // lblComplemento
-            // 
-            this.lblComplemento.AutoSize = true;
-            this.lblComplemento.Location = new System.Drawing.Point(803, 220);
-            this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblComplemento.Name = "lblComplemento";
-            this.lblComplemento.Size = new System.Drawing.Size(112, 20);
-            this.lblComplemento.TabIndex = 26;
-            this.lblComplemento.Text = "Complemento:";
+            this.ofdCarregar.FileName = "openFileDialog1";
             // 
             // frmGerenciarVoluntarios
             // 
@@ -611,9 +624,10 @@
         private System.Windows.Forms.DateTimePicker dtpData;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.PictureBox pcbFotoVoluntario;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.CheckBox ckbAtivo;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label lblComplemento;
+        private System.Windows.Forms.Button btnCarregar;
+        private System.Windows.Forms.OpenFileDialog ofdCarregar;
     }
 }
