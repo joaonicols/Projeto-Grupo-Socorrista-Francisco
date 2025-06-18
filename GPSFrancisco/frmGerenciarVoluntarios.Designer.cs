@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGerenciarVoluntarios));
             this.gpbInformacoesVoluntarios = new System.Windows.Forms.GroupBox();
+            this.btnInserir = new System.Windows.Forms.Button();
             this.txtComplemento = new System.Windows.Forms.TextBox();
             this.lblComplemento = new System.Windows.Forms.Label();
             this.pcbFotoVoluntario = new System.Windows.Forms.PictureBox();
@@ -70,7 +71,6 @@
             this.lblData = new System.Windows.Forms.Label();
             this.cbbAtribuicoes = new System.Windows.Forms.ComboBox();
             this.lblAtribuicoes = new System.Windows.Forms.Label();
-            this.btnCarregar = new System.Windows.Forms.Button();
             this.ofdCarregar = new System.Windows.Forms.OpenFileDialog();
             this.gpbInformacoesVoluntarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoVoluntario)).BeginInit();
@@ -80,7 +80,7 @@
             // 
             // gpbInformacoesVoluntarios
             // 
-            this.gpbInformacoesVoluntarios.Controls.Add(this.btnCarregar);
+            this.gpbInformacoesVoluntarios.Controls.Add(this.btnInserir);
             this.gpbInformacoesVoluntarios.Controls.Add(this.txtComplemento);
             this.gpbInformacoesVoluntarios.Controls.Add(this.lblComplemento);
             this.gpbInformacoesVoluntarios.Controls.Add(this.pcbFotoVoluntario);
@@ -113,6 +113,16 @@
             this.gpbInformacoesVoluntarios.TabIndex = 1;
             this.gpbInformacoesVoluntarios.TabStop = false;
             this.gpbInformacoesVoluntarios.Text = "Informações do Voluntário";
+            // 
+            // btnInserir
+            // 
+            this.btnInserir.Location = new System.Drawing.Point(1051, 198);
+            this.btnInserir.Name = "btnInserir";
+            this.btnInserir.Size = new System.Drawing.Size(104, 42);
+            this.btnInserir.TabIndex = 27;
+            this.btnInserir.Text = "Inserir";
+            this.btnInserir.UseVisualStyleBackColor = true;
+            this.btnInserir.Click += new System.EventHandler(this.btnInserir_Click);
             // 
             // txtComplemento
             // 
@@ -545,16 +555,6 @@
             this.lblAtribuicoes.TabIndex = 8;
             this.lblAtribuicoes.Text = "Atribuições:";
             // 
-            // btnCarregar
-            // 
-            this.btnCarregar.Location = new System.Drawing.Point(1066, 198);
-            this.btnCarregar.Name = "btnCarregar";
-            this.btnCarregar.Size = new System.Drawing.Size(90, 28);
-            this.btnCarregar.TabIndex = 27;
-            this.btnCarregar.Text = "Carregar";
-            this.btnCarregar.UseVisualStyleBackColor = true;
-            this.btnCarregar.Click += new System.EventHandler(this.btnCarregar_Click);
-            // 
             // ofdCarregar
             // 
             this.ofdCarregar.FileName = "openFileDialog1";
@@ -627,7 +627,7 @@
         private System.Windows.Forms.CheckBox ckbAtivo;
         private System.Windows.Forms.TextBox txtComplemento;
         private System.Windows.Forms.Label lblComplemento;
-        private System.Windows.Forms.Button btnCarregar;
+        private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.OpenFileDialog ofdCarregar;
     }
 }

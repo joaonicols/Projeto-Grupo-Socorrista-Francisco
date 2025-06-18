@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using MosaicoSolutions.ViaCep;
+using System.IO;
 
 namespace GPSFrancisco
 {
@@ -57,10 +58,10 @@ namespace GPSFrancisco
             this.Hide();
         }
 
-        public int cadastrarVoluntarios(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, int codAtr, string data,  string hora,  int status)
+        public int cadastrarVoluntarios(string nome, string email, string telCel, string endereco, string numero, string cep, string bairro, string cidade, string estado, int codAtr, DateTime data,  DateTime hora,  int status, long foto)
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "insert into tbVoluntarios(nome, email, telCel, endereco, numero, cep, bairro, cidade, estado, codAtr, data, hora, status) values (@nome, @email, @telCel, @endereco, @numero, @cep, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status);";
+            comm.CommandText = "insert into tbVoluntarios(nome, email, telCel, endereco, numero, cep, bairro, cidade, estado, codAtr, data, hora, status, fotos) values (@nome, @email, @telCel, @endereco, @numero, @cep, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status, @fotos);";
             comm.CommandType = CommandType.Text;
 
             comm.Parameters.Clear();
@@ -74,9 +75,10 @@ namespace GPSFrancisco
             comm.Parameters.Add("@cidade", MySqlDbType.VarChar, 100).Value = cidade;
             comm.Parameters.Add("@estado", MySqlDbType.VarChar, 2).Value = estado;
             comm.Parameters.Add("@codAtr", MySqlDbType.Int32).Value = codigoAtribuicao;
-            comm.Parameters.Add("@data", MySqlDbType.Date, 100).Value = data;
-            comm.Parameters.Add("@hora", MySqlDbType.Time, 100).Value = hora;
+            comm.Parameters.Add("@data", MySqlDbType.DateTime, 100).Value = data;
+            comm.Parameters.Add("@hora", MySqlDbType.DateTime, 100).Value = hora;
             comm.Parameters.Add("@status", MySqlDbType.Bit, 100).Value = status;
+            comm.Parameters.Add("@fotos", MySqlDbType.LongBlob).Value = foto;
 
             comm.Connection = Conexao.obterConexao();
 
@@ -172,7 +174,7 @@ namespace GPSFrancisco
             cbbEstado.Enabled = true;
             dtpData.Enabled = true;
             dtpHoras.Enabled = true;
-            ckbAtivo.Enabled = false;
+            ckbAtivo.Enabled = true;
             btnCadastrar.Enabled = true;
             btnAlterar.Enabled = false;
             btnExcluir.Enabled = false;
@@ -259,18 +261,18 @@ namespace GPSFrancisco
                 {
                     status = 0;
                 }
-                if (cadastrarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, dtpData.Text, dtpHoras.Text, status) == 1)
+                if (cadastrarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, Convert.ToDateTime(dtpData.Text), Convert.ToDateTime(dtpHoras.Text), status, salvarFotos().LongLength) == 1)
                 {
-
+                    MessageBox.Show("Cadastrado com sucesso.",
+                        "Mensagem do sistema",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information,
+                         MessageBoxDefaultButton.Button1);
+                    limparCampos();
+                    desabilitarCamposNovo();
                 }
 
-                MessageBox.Show("Cadastrado com sucesso.",
-                    "Mensagem do sistema",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-                limparCampos();
-                desabilitarCamposNovo();
+
             }
         }
 
@@ -363,13 +365,35 @@ namespace GPSFrancisco
             this.Hide();
         }
 
-        private void btnCarregar_Click(object sender, EventArgs e)
+        public byte[] salvarFotos()
         {
-            //pcbFotoVoluntario.Image = Image.FromFile(@"C:\Users\joao.nsarruda\Documents\Visual Studio 2022\TDS01\images/yuri.jpg");
-            //pcbFotoVoluntario.ImageLocation = @"C:\Users\joao.nsarruda\Documents\Visual Studio 2022\TDS01\images/yuri.jpg";
-            ofdCarregar.ShowDialog();
-            string path = ofdCarregar.FileName;
-            pcbFotoVoluntario.Image = Image.FromFile(path);
+            byte[] imagem_byte = null;
+
+            FileStream fs = new FileStream(enderecoFoto, FileMode.Open, FileAccess.Read);
+
+            BinaryReader br = new BinaryReader(fs);
+
+            imagem_byte = br.ReadBytes((int)fs.Length);
+            return imagem_byte;
         }
+
+
+        string enderecoFoto;
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "JPG Files(*.jpg)|*.jpg|PNG Files(*.png)|*.png|AllFiles(*.*) | *.*";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string foto = dialog.FileName.ToString();
+                enderecoFoto = foto;
+                pcbFotoVoluntario.ImageLocation = foto;
+                txtNome.Focus();
+                
+
+            }
+        }
+
     }
 }

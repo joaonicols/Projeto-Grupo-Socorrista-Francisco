@@ -97,6 +97,7 @@
             this.Controls.Add(this.btnUsuários);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.btnVoluntarios);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMenuPrincipal";
             this.Text = "GPSFrancisco - Menu Principal";
             this.ResumeLayout(false);
