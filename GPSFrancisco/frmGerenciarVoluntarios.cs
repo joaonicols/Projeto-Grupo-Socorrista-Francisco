@@ -329,6 +329,9 @@ namespace GPSFrancisco
                 status = false;
             }
 
+            byte[] imageData = (byte[])DR.GetValue(16);
+            MemoryStream ms = new MemoryStream(imageData);
+
             txtCodigo.Text = Convert.ToString(DR.GetInt32(0));
             txtNome.Text = DR.GetString(1);
             txtEmail.Text = DR.GetString(2);
@@ -349,6 +352,43 @@ namespace GPSFrancisco
             Conexao.fecharConexao();
 
             habilitarCamposAlterar();
+        }
+
+        //alterar voluntários
+        public int alterarVoluntarios(string nome) 
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "update";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("", MySqlDbType.Int32).Value = nome;
+
+            comm.Connection = Conexao.obterConexao();
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.fecharConexao();
+
+            return resp;
+        }
+
+        //excluir voluntários
+        public int excluirVoluntarios(int codVol)
+        {
+            MySqlCommand comm = new MySqlCommand();
+            comm.CommandText = "delete from tbVoluntarios where codVol = @codVol;";
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.Clear();
+            comm.Parameters.Add("@codVol", MySqlDbType.Int32).Value = codVol;
+            comm.Connection = Conexao.obterConexao();
+
+            int resp = comm.ExecuteNonQuery();
+
+            Conexao.fecharConexao();
+
+            return resp;
         }
 
 
@@ -398,5 +438,65 @@ namespace GPSFrancisco
             }
         }
 
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            int resp = alterarVoluntarios(txtNome.Text);
+            if(resp == 1)
+            {
+                MessageBox.Show("Alterado com sucesso!!!",
+                    "Mensagem do sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                MessageBox.Show("Erro ao alterar.",
+                    "Mensagem do sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+              DialogResult result = MessageBox.Show("Deseja excluir?",
+                "Mensagem do sistema",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+            {
+                int resp = excluirVoluntarios(Convert.ToInt32(txtCodigo.Text));
+
+                if (resp == 1)
+                {
+                    MessageBox.Show("Excluído com sucesso!!!",
+                        "Mensagem do Sistema",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1);
+                    limparCampos();
+                    desabilitarCamposNovo();
+                }
+
+                else
+                {
+                    MessageBox.Show("Erro ao excluir",
+                        "Mensagem do sistema",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Error,
+                         MessageBoxDefaultButton.Button1);
+                }
+            }
+            else
+            {
+                limparCampos();
+                desabilitarCamposNovo();
+                btnNovo.Enabled = true;
+            }
+        }
     }
 }
