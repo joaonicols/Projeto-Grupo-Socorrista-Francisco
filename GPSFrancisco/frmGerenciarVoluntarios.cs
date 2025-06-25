@@ -58,10 +58,10 @@ namespace GPSFrancisco
             this.Hide();
         }
 
-        public int cadastrarVoluntarios(string nome, string email, string telCel, string endereco, string numero, string cep, string complemento, string bairro, string cidade, string estado, int codAtr, DateTime data,  DateTime hora,  int status, long foto)
+        public int cadastrarVoluntarios(string nome, string email, string telCel, string endereco, string numero, string cep, string complemento, string bairro, string cidade, string estado, int codAtr, DateTime data,  DateTime hora,  int status, byte[] foto)
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "insert into tbVoluntarios(nome, email, telCel, endereco, numero, cep, complemento, bairro, cidade, estado, codAtr, data, hora, status, fotos) values (@nome, @email, @telCel, @endereco, @numero, @cep, @complemento, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status, @fotos);";
+            comm.CommandText = "insert into tbVoluntarios( nome, email, telCel, endereco, numero, cep, complemento, bairro, cidade, estado, codAtr, data, hora, status, fotos) values ( @nome, @email, @telCel, @endereco, @numero, @cep, @complemento, @bairro, @cidade, @estado, @codAtr, @data, @hora, @status, @fotos);";
             comm.CommandType = CommandType.Text;
 
             comm.Parameters.Clear();
@@ -262,7 +262,7 @@ namespace GPSFrancisco
                 {
                     status = 0;
                 }
-                if (cadastrarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtComplemento.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, Convert.ToDateTime(dtpData.Text), Convert.ToDateTime(dtpHoras.Text), status, salvarFotos().LongLength) == 1)
+                if (cadastrarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtComplemento.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, Convert.ToDateTime(dtpData.Text), Convert.ToDateTime(dtpHoras.Text), status, salvarFotos()) == 1)
                 {
                     MessageBox.Show("Cadastrado com sucesso.",
                         "Mensagem do sistema",
@@ -329,9 +329,9 @@ namespace GPSFrancisco
                 status = false;
             }
 
-            byte[] imageData = (byte[])DR.GetValue(16);
+            byte[] imageData = (byte[])DR.GetValue(15);
             MemoryStream ms = new MemoryStream(imageData);
-
+             
             txtCodigo.Text = Convert.ToString(DR.GetInt32(0));
             txtNome.Text = DR.GetString(1);
             txtEmail.Text = DR.GetString(2);
@@ -348,6 +348,7 @@ namespace GPSFrancisco
             dtpHoras.Value = DR.GetDateTime(13);
             ckbAtivo.Checked = status;
             cbbAtribuicoes.Text = DR.GetString(17);
+            pcbFotoVoluntario.Image = Image.FromStream(ms);
 
             Conexao.fecharConexao();
 
@@ -355,14 +356,34 @@ namespace GPSFrancisco
         }
 
         //alterar voluntários
-        public int alterarVoluntarios(string nome) 
+        public int alterarVoluntarios(string nome, string email, string telCel,
+        string endereco, string numero, string cep, string complemento, string bairro,
+         string cidade, string estado, int codAtr,
+        DateTime data, DateTime hora, int status, byte[] foto, int codVol) 
         {
             MySqlCommand comm = new MySqlCommand();
-            comm.CommandText = "update";
+            comm.CommandText = "update tbVoluntarios set nome=@nome,email=@email,telCel=@telCel,endereco=@endereco,numero=@numero,cep=@cep,complemento=@complemento,bairro=@bairro,cidade=@cidade,estado=@estado,codAtr=@codAtr,data=@data,hora=@hora,status=@status,foto=@foto where codVol=@codVol;"; ;
             comm.CommandType = CommandType.Text;
 
             comm.Parameters.Clear();
-            comm.Parameters.Add("", MySqlDbType.Int32).Value = nome;
+
+
+            comm.Parameters.Add("@nome", MySqlDbType.VarChar, 100).Value = nome;
+            comm.Parameters.Add("@email", MySqlDbType.VarChar, 100).Value = email;
+            comm.Parameters.Add("@telCel", MySqlDbType.VarChar, 15).Value = telCel;
+            comm.Parameters.Add("@endereco", MySqlDbType.VarChar, 100).Value = endereco;
+            comm.Parameters.Add("@numero", MySqlDbType.VarChar, 5).Value = numero;
+            comm.Parameters.Add("@cep", MySqlDbType.VarChar, 9).Value = cep;
+            comm.Parameters.Add("@complemento", MySqlDbType.VarChar, 100).Value = complemento;
+            comm.Parameters.Add("@bairro", MySqlDbType.VarChar, 100).Value = bairro;
+            comm.Parameters.Add("@cidade", MySqlDbType.VarChar, 100).Value = cidade;
+            comm.Parameters.Add("@estado", MySqlDbType.VarChar, 2).Value = estado;
+            comm.Parameters.Add("@codAtr", MySqlDbType.Int32).Value = codigoAtribuicao;
+            comm.Parameters.Add("@data", MySqlDbType.DateTime, 100).Value = data;
+            comm.Parameters.Add("@hora", MySqlDbType.DateTime, 100).Value = hora;
+            comm.Parameters.Add("@status", MySqlDbType.Int32).Value = status;
+            comm.Parameters.Add("@foto", MySqlDbType.LongBlob).Value = foto;
+            comm.Parameters.Add("@codVol", MySqlDbType.Int32).Value = codVol;
 
             comm.Connection = Conexao.obterConexao();
 
@@ -440,7 +461,19 @@ namespace GPSFrancisco
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-            int resp = alterarVoluntarios(txtNome.Text);
+            int status = 0;
+            if (ckbAtivo.Checked)
+            {
+                status = 1;
+            }
+            else
+            {
+                status = 0;
+            }
+
+
+            int resp = alterarVoluntarios(txtNome.Text, txtEmail.Text, mtbTelefone.Text, txtEndereco.Text, txtNumero.Text, mtbCEP.Text, txtComplemento.Text, txtBairro.Text, txtCidade.Text, cbbEstado.Text, codigoAtribuicao, dtpData.Value, dtpHoras.Value, status, salvarFotos(), Convert.ToInt32(txtCodigo.Text));
+            
             if(resp == 1)
             {
                 MessageBox.Show("Alterado com sucesso!!!",
@@ -497,6 +530,11 @@ namespace GPSFrancisco
                 desabilitarCamposNovo();
                 btnNovo.Enabled = true;
             }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
