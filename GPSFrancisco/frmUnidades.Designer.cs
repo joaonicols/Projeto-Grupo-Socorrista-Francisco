@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUnidades));
             this.gpbUnidade = new System.Windows.Forms.GroupBox();
+            this.txtUnidade = new System.Windows.Forms.TextBox();
+            this.lblUnidade = new System.Windows.Forms.Label();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.lblDescricao = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.btnNovo = new System.Windows.Forms.Button();
             this.ofdCarregar = new System.Windows.Forms.OpenFileDialog();
-            this.txtUnidade = new System.Windows.Forms.TextBox();
-            this.lblUnidade = new System.Windows.Forms.Label();
             this.gpbUnidade.SuspendLayout();
             this.pnlCRUD.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +66,25 @@
             this.gpbUnidade.TabIndex = 6;
             this.gpbUnidade.TabStop = false;
             this.gpbUnidade.Text = "Unidade";
+            // 
+            // txtUnidade
+            // 
+            this.txtUnidade.Location = new System.Drawing.Point(256, 133);
+            this.txtUnidade.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtUnidade.MaxLength = 50;
+            this.txtUnidade.Name = "txtUnidade";
+            this.txtUnidade.Size = new System.Drawing.Size(151, 26);
+            this.txtUnidade.TabIndex = 7;
+            // 
+            // lblUnidade
+            // 
+            this.lblUnidade.AutoSize = true;
+            this.lblUnidade.Location = new System.Drawing.Point(251, 110);
+            this.lblUnidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUnidade.Name = "lblUnidade";
+            this.lblUnidade.Size = new System.Drawing.Size(73, 20);
+            this.lblUnidade.TabIndex = 8;
+            this.lblUnidade.Text = "Unidade:";
             // 
             // txtDescricao
             // 
@@ -119,6 +138,7 @@
             this.btnAlterar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAlterar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // pnlCRUD
             // 
@@ -148,6 +168,7 @@
             this.btnVoltar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVoltar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVoltar.UseVisualStyleBackColor = true;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // btnLimpar
             // 
@@ -162,6 +183,7 @@
             this.btnLimpar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnPesquisar
             // 
@@ -176,6 +198,7 @@
             this.btnPesquisar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPesquisar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // btnExcluir
             // 
@@ -190,6 +213,7 @@
             this.btnExcluir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnCadastrar
             // 
@@ -204,6 +228,7 @@
             this.btnCadastrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCadastrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // btnNovo
             // 
@@ -218,29 +243,11 @@
             this.btnNovo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // ofdCarregar
             // 
             this.ofdCarregar.FileName = "openFileDialog1";
-            // 
-            // txtUnidade
-            // 
-            this.txtUnidade.Location = new System.Drawing.Point(256, 133);
-            this.txtUnidade.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtUnidade.MaxLength = 50;
-            this.txtUnidade.Name = "txtUnidade";
-            this.txtUnidade.Size = new System.Drawing.Size(151, 26);
-            this.txtUnidade.TabIndex = 7;
-            // 
-            // lblUnidade
-            // 
-            this.lblUnidade.AutoSize = true;
-            this.lblUnidade.Location = new System.Drawing.Point(251, 110);
-            this.lblUnidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUnidade.Name = "lblUnidade";
-            this.lblUnidade.Size = new System.Drawing.Size(73, 20);
-            this.lblUnidade.TabIndex = 8;
-            this.lblUnidade.Text = "Unidade:";
             // 
             // frmUnidades
             // 
@@ -252,6 +259,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmUnidades";
             this.Text = "frmUnidades";
+            this.Load += new System.EventHandler(this.frmUnidades_Load);
             this.gpbUnidade.ResumeLayout(false);
             this.gpbUnidade.PerformLayout();
             this.pnlCRUD.ResumeLayout(false);
